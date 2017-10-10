@@ -12,6 +12,22 @@ public class BSet extends JButton{
         
     }
     
+    public void end(){
+        setText("End");
+        setActionCommand("MM");
+        setFont(new Font("Papyrus", Font.BOLD, 12));
+        setBackground(Color.WHITE);
+        
+    }
+    
+    public void skip(){
+        setText("Skip");
+        setActionCommand("Skip");
+        setFont(new Font("Papyrus", Font.BOLD, 12));
+        setBackground(Color.WHITE);
+        
+    }
+    
     public void Score(){
         setText("Highscores");
         setActionCommand("Scores");
@@ -149,117 +165,104 @@ public class BSet extends JButton{
     {
         setText("N");
         setActionCommand("N");
-        setFont(new Font("Papyrus", Font.PLAIN, 12));
+        setFont(new Font("Papyrus", Font.PLAIN, 10));
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
-        setPreferredSize(new Dimension(25,15));
     }
     public void O()
     {
         setText("O");
         setActionCommand("O");
-        setFont(new Font("Papyrus", Font.PLAIN, 12));
+        setFont(new Font("Papyrus", Font.PLAIN, 10));
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
-        setPreferredSize(new Dimension(25,15));
     }
     public void P()
     {
         setText("P");
         setActionCommand("P");
-        setFont(new Font("Papyrus", Font.PLAIN, 12));
+        setFont(new Font("Papyrus", Font.PLAIN, 10));
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
-        setPreferredSize(new Dimension(25,15));
     }
     public void Q()
     {
         setText("Q");
         setActionCommand("Q");
-        setFont(new Font("Papyrus", Font.PLAIN, 12));
+        setFont(new Font("Papyrus", Font.PLAIN, 10));
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
-        setPreferredSize(new Dimension(25,15));
     }
     public void R()
     {
         setText("R");
         setActionCommand("R");
-        setFont(new Font("Papyrus", Font.PLAIN, 12));
+        setFont(new Font("Papyrus", Font.PLAIN, 10));
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
-        setPreferredSize(new Dimension(25,15));
     }
     public void S()
     {
         setText("S");
         setActionCommand("S");
-        setFont(new Font("Papyrus", Font.PLAIN, 12));
+        setFont(new Font("Papyrus", Font.PLAIN, 10));
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
-        setPreferredSize(new Dimension(25,15));
     }
     public void T()
     {
         setText("T");
         setActionCommand("T");
-        setFont(new Font("Papyrus", Font.PLAIN, 12));
+        setFont(new Font("Papyrus", Font.PLAIN, 10));
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
-        setPreferredSize(new Dimension(25,15));
     }
     public void U()
     {
         setText("U");
         setActionCommand("U");
-        setFont(new Font("Papyrus", Font.PLAIN, 12));
+        setFont(new Font("Papyrus", Font.PLAIN, 10));
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
-        setPreferredSize(new Dimension(25,15));
     }
     public void V()
     {
         setText("V");
         setActionCommand("V");
-        setFont(new Font("Papyrus", Font.PLAIN, 12));
+        setFont(new Font("Papyrus", Font.PLAIN, 10));
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
-        setPreferredSize(new Dimension(25,15));
     }
     public void W()
     {
         setText("W");
         setActionCommand("W");
-        setFont(new Font("Papyrus", Font.PLAIN, 12));
+        setFont(new Font("Papyrus", Font.PLAIN, 10));
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
-        setPreferredSize(new Dimension(25,15));
     }
     public void X()
     {
         setText("X");
         setActionCommand("X");
-        setFont(new Font("Papyrus", Font.PLAIN, 12));
+        setFont(new Font("Papyrus", Font.PLAIN, 10));
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
-        setPreferredSize(new Dimension(25,15));
     }
     public void Y()
     {
         setText("Y");
         setActionCommand("Y");
-        setFont(new Font("Papyrus", Font.PLAIN, 12));
+        setFont(new Font("Papyrus", Font.PLAIN, 10));
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
-        setPreferredSize(new Dimension(25,15));
     }
     public void Z()
     {
         setText("Z");
         setActionCommand("Z");
-        setFont(new Font("Papyrus", Font.PLAIN, 12));
+        setFont(new Font("Papyrus", Font.PLAIN, 10));
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
-        setPreferredSize(new Dimension(25,15));
     }
 }
