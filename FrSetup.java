@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.*;
+
 public class FrSetup extends JFrame implements ActionListener{
     static Timer timer;
     String[] wordList = {"abstract", "cemetery", "nurse", "pharmacy","climbing"};
@@ -20,32 +21,14 @@ public class FrSetup extends JFrame implements ActionListener{
     int level = (int) (Math.random() * 5);
     int wrong;
     int right;
-    int[] wordLength = new int[5];
+    //int[] wordLength = new int[5];
     String letter;
     boolean jumpToEnd = false;
     JLabel img = new JLabel(bg, JLabel.CENTER);
    
-
-    
-//    public static void main(String[]args){
-//        FrSetup w = new FrSetup();
-//        w.inSet();
-//        ActionListener timedSwitch = new ActionListener(){
-//            @Override
-//            public void actionPerformed(ActionEvent e){
-//                timer.stop();
-//                w.Menu();
-//            }
-//        };
-//        timer = new Timer(3000, timedSwitch);
-//        timer.setRepeats(false);
-//        timer.setInitialDelay(3000);
-//        w.titleCard();
-//        timer.start();
-//    }
     
     public void inSet(){
-        setTitle("Test");
+        setTitle("CS245 Team Pending Hangman");
         setPreferredSize(new Dimension(600,400));
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -125,14 +108,13 @@ public class FrSetup extends JFrame implements ActionListener{
         buttonMount2.setBackground(Color.white);
         
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-        Date myDate;
         JLabel time = new JLabel("--/--/---- --:--:--", JLabel.CENTER);
         ActionListener actiondate = new ActionListener() 
         {
             @Override
             public void actionPerformed(ActionEvent ae) 
             {
-                java.util.Date myDate = new Date();
+                Date myDate = new Date();
                 time.setText(dateFormat.format(myDate));
                 }
         };
@@ -296,40 +278,55 @@ public class FrSetup extends JFrame implements ActionListener{
         bg = new ImageIcon("hangman_0.jpg");
         score.setText("100");
         level = (int) (Math.random() * 5);
-
+        letter = "";
+        for(int k = 0; k <wordList[level].length(); k++){
+            letter += " ";
+        }
         img.setPreferredSize(new Dimension(271, 200));
-        JPanel imgPane = new JPanel(new GridLayout(3,0));
+        JPanel imgPane = new JPanel(new BorderLayout());
         JPanel back = new JPanel(new GridLayout(2,0));
-        JPanel drawer = new JPanel(new GridLayout(0,2));
+        JPanel drawer = new JPanel(new GridLayout(4,0));
         back.setBackground(Color.white);
         drawer.setBackground(Color.white);
-        labelTitle = new JLabel("A", JLabel.CENTER);
+        labelTitle = new JLabel("", JLabel.CENTER);
         JLabel jlLines = new JLabel("__ ", JLabel.CENTER);
         textField.setFont(new Font("Rockwell", Font.PLAIN, 20));
         labelTitle.setFont(new Font("Rockwell", Font.PLAIN, 20));
         jlLines.setFont(new Font("Rockewell", Font.PLAIN, 20));
 
         img.setIcon(bg);
-        imgPane.setBackground(Color.red);
-        imgPane.add(img);
-
+        imgPane.setBackground(Color.white);
+        imgPane.add(img, BorderLayout.NORTH);
+        JLabel empty = new JLabel();
+        empty.setFont(new Font("Papyrus", Font.PLAIN, 30));
+        empty.setText("");
+        JLabel empty2 = new JLabel();
+        empty2.setFont(new Font("Papyrus", Font.PLAIN, 30));
+        empty2.setText("");
+        JLabel title = new JLabel();
+        title.setFont(new Font("Papyrus", Font.PLAIN, 24));
+        title.setText("Score:");
+        drawer.add(empty);
+        drawer.add(title);
+        score.setFont(new Font("Papyrus", Font.PLAIN, 16));
+        drawer.add(score);
+        drawer.add(empty2);
+        imgPane.add(drawer, BorderLayout.EAST);
+        
         String line = "";
 
-        for (int m = 0; m < wordLength[level]; m++)
+        for (int m = 0; m < wordList[level].length(); m++)
         {
             line += "__ ";
 
         }
-//        jlLines.setText(line);
-//        letter = null;
-//        drawer.add(labelTitle);
-//        drawer.add(jlLines);
-        imgPane.add(jlLines);
-        imgPane.add(labelTitle);
+        jlLines.setText(line);
+        back.add(labelTitle);
+        back.add(jlLines);
+        imgPane.add(back);
 
-    add(imgPane);
-        
 
+        add(imgPane);
         
         wrong = 0;
         right = 0;
@@ -373,6 +370,7 @@ public class FrSetup extends JFrame implements ActionListener{
                 revalidate();
             }
         }else{
+            updateHint(let);
             right++;
             if(right == uniqueList[level]){
                 getContentPane().removeAll();
@@ -382,12 +380,28 @@ public class FrSetup extends JFrame implements ActionListener{
         }
     }
     
+    public void updateHint(String let){
+        char a = let.charAt(0);
+        char[] word = wordList[level].toCharArray();
+        char[] lword = letter.toCharArray();
+        for(int g = 0; g <wordList[level].length(); g++){
+            if(a == word[g]){
+                lword[g] = word[g];
+            }
+        }
+        letter = new String(lword);
+        String temp = new String();
+        temp = letter;
+        temp = temp.replaceAll(".", "$0   ").trim();
+        labelTitle.setText(temp);
+    }
+    
     public void Credits(){
         BSet b = new BSet();
         b.back();
         JPanel backPanel = new JPanel();
         backPanel.setLayout(new GridLayout(0,8));
-        backPanel.setBackground(Color.orange);
+        backPanel.setBackground(Color.red);
         backPanel.add(b);
         b.addActionListener(this);
         
@@ -396,7 +410,7 @@ public class FrSetup extends JFrame implements ActionListener{
         Header.setFont(new Font("Papyrus", Font.PLAIN, 30));
         Header.setHorizontalAlignment(JLabel.CENTER);
         JPanel CredList = new JPanel();
-        CredList.setBackground(Color.orange);
+        CredList.setBackground(Color.red);
         JLabel Score1 = new JLabel("Jacob Kim, BroncoID: 010500230");
         Score1.setHorizontalAlignment(JLabel.CENTER);
         JLabel Score2 = new JLabel("James Lee, BroncoID: 009687340");
@@ -423,7 +437,7 @@ public class FrSetup extends JFrame implements ActionListener{
         b.back();
         JPanel backPanel = new JPanel();
         backPanel.setLayout(new GridLayout(0,8));
-        backPanel.setBackground(Color.orange);
+        backPanel.setBackground(Color.BLUE);
         backPanel.add(b);
         b.addActionListener(this);
         
@@ -433,16 +447,16 @@ public class FrSetup extends JFrame implements ActionListener{
         Header.setFont(new Font("Papyrus", Font.PLAIN, 30));
         Header.setHorizontalAlignment(JLabel.CENTER);
         JPanel ScoreList = new JPanel();
-        ScoreList.setBackground(Color.orange);
-        JLabel Score1 = new JLabel(String.valueOf(s[0]));
+        ScoreList.setBackground(Color.BLUE);
+        JLabel Score1 = new JLabel("ABC....."+String.valueOf(s[0]));
         Score1.setHorizontalAlignment(JLabel.CENTER);
-        JLabel Score2 = new JLabel(String.valueOf(s[1]));
+        JLabel Score2 = new JLabel("ABC....."+String.valueOf(s[1]));
         Score2.setHorizontalAlignment(JLabel.CENTER);
-        JLabel Score3 = new JLabel(String.valueOf(s[2]));
+        JLabel Score3 = new JLabel("ABC....."+String.valueOf(s[2]));
         Score3.setHorizontalAlignment(JLabel.CENTER);
-        JLabel Score4 = new JLabel(String.valueOf(s[3]));
+        JLabel Score4 = new JLabel("ABC....."+String.valueOf(s[3]));
         Score4.setHorizontalAlignment(JLabel.CENTER);
-        JLabel Score5 = new JLabel(String.valueOf(s[4]));
+        JLabel Score5 = new JLabel("ABC....."+String.valueOf(s[4]));
         Score5.setHorizontalAlignment(JLabel.CENTER);
         
         
