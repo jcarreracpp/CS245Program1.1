@@ -10,7 +10,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.*;
 public class FrSetup extends JFrame implements ActionListener{
-    private static Timer timer;
+    static Timer timer;
+    String[] wordList = {"abstract", "cemetery", "nurse", "pharmacy","climbing"};
+    boolean[] alphabet = new boolean[26];
+    JTextField textField = new JTextField();
+    JLabel labelTitle = new JLabel();
+    JLabel score = new JLabel();
+    ImageIcon bg = new ImageIcon();
+    int level = (int) (Math.random() * 5);
+    String letter;
+   
+
     
 //    public static void main(String[]args){
 //        FrSetup w = new FrSetup();
@@ -40,7 +50,7 @@ public class FrSetup extends JFrame implements ActionListener{
     
     public void wipe(){
         getContentPane().removeAll();
-        getContentPane().repaint();
+        revalidate();
     }
     
     public void titleCard(){
@@ -273,7 +283,106 @@ public class FrSetup extends JFrame implements ActionListener{
         add(backPanel);
         add(timePanel, BorderLayout.EAST);
         add(buttonList, BorderLayout.SOUTH);
+        gameStart();
+    }
+    
+    public void gameStart(){
+        int[] wordLength = new int[5];
+        bg = new ImageIcon("hangman_0.jpg");
+        score.setText("100");
 
+        JLabel img = new JLabel(bg, JLabel.CENTER);
+        JPanel imgPane = new JPanel();
+        labelTitle = new JLabel("HANGMAN", JLabel.CENTER);
+        JLabel jlLines = new JLabel("__ ", JLabel.CENTER);
+        textField.setFont(new Font("Rockwell", Font.PLAIN, 20));
+        labelTitle.setFont(new Font("Rockwell", Font.PLAIN, 20));
+        jlLines.setFont(new Font("Rockewell", Font.PLAIN, 20));
+       
+        img.setIcon(bg);
+        imgPane.setBackground(Color.white);
+        imgPane.add(img);
+
+
+        String line = "";
+        
+        for (int j = 0; j < 5; j++) 
+        {
+            wordLength[j] = wordList[j].length();// gets length of words
+        }
+        
+
+//        for (int m = 0; m < wordLength[level]; m++)
+//        {
+//            line += "__ ";
+//        }
+//        jlLines.setText(line);
+
+        textField.addActionListener(new ActionListener() 
+        {
+            int wrong = 0;
+
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                JTextField tf = (JTextField) e.getSource();
+                letter = tf.getText();
+                tf.setText("");
+
+                labelTitle.setText(labelTitle.getText() + letter + " ");
+                char[] jlabelText = jlLines.getText().toCharArray();
+                
+                // System.out.println(wordList[level]);
+                if (!wordList[level].contains(letter)) 
+                {
+                    wrong++;
+                    if (wrong == 1) 
+                    {
+                        bg = new ImageIcon("hangman_1.jpg");
+                        img.setIcon(bg);
+                        score.setText("90");
+                    }
+                    if (wrong == 2) 
+                    {
+                        bg = new ImageIcon("hangman_2.jpg");
+                        img.setIcon(bg);
+                        score.setText("80");
+                    }
+                    if (wrong == 3) 
+                    {
+                        bg = new ImageIcon("hangman_3.jpg");
+                        img.setIcon(bg);
+                        score.setText("70");
+                    }
+                    if (wrong == 4) 
+                    {
+                        bg = new ImageIcon("hangman_4.jpg");
+                        img.setIcon(bg);
+                        score.setText("60");
+                    }
+                    if (wrong == 5) 
+                    {
+                        bg = new ImageIcon("hangman_5.jpg");
+                        img.setIcon(bg);
+                        score.setText("50");
+                    }
+                    if (wrong == 6) 
+                    {
+                        bg = new ImageIcon("hangman_6.jpg");
+                        img.setIcon(bg);
+                        score.setText("40");
+                        level = (int) (Math.random() * 64);
+                        getContentPane().removeAll();
+                        EndGame();
+                        revalidate();
+                    }
+                    return;
+                }
+            }// end actionPerformed method
+        });
+        add(imgPane);
+        add(textField, BorderLayout.NORTH);
+        add(labelTitle, BorderLayout.WEST);
     }
    
     public void Credits(){
@@ -293,7 +402,7 @@ public class FrSetup extends JFrame implements ActionListener{
         CredList.setBackground(Color.orange);
         JLabel Score1 = new JLabel("Jacob Kim, BroncoID: 010500230");
         Score1.setHorizontalAlignment(JLabel.CENTER);
-        JLabel Score2 = new JLabel("name");
+        JLabel Score2 = new JLabel("James Lee, BroncoID: 009687340");
         Score2.setHorizontalAlignment(JLabel.CENTER);
         JLabel Score3 = new JLabel("Jorge Luis Carrera, BroncoID: 009863178");
         Score3.setHorizontalAlignment(JLabel.CENTER);
@@ -377,9 +486,9 @@ public class FrSetup extends JFrame implements ActionListener{
         JLabel title = new JLabel();
         title.setFont(new Font("Papyrus", Font.PLAIN, 48));
         title.setText("Score:");
-        JLabel score = new JLabel();
+
         score.setFont(new Font("Papyrus", Font.PLAIN, 30));
-        score.setText("Here it is");
+
 
         backGround.add(empty);
         backGround.add(title);
@@ -422,6 +531,156 @@ public class FrSetup extends JFrame implements ActionListener{
             revalidate();
         }
         if(e.getActionCommand().equals("A")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("B")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("C")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("D")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("E")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("F")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("G")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("H")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("I")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("J")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("K")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("L")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("M")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("N")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("O")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("P")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("Q")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("R")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("S")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("T")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("U")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("V")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("W")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("X")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("Y")){
+            System.out.println("Thicc dragen");
+            JButton pButton= (JButton) e.getSource();
+            pButton.setEnabled(false);
+            pButton.setBackground(Color.DARK_GRAY);
+        }
+        if(e.getActionCommand().equals("Z")){
             System.out.println("Thicc dragen");
             JButton pButton= (JButton) e.getSource();
             pButton.setEnabled(false);
