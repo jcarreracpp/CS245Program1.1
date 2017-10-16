@@ -10,6 +10,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.*;
 
+/**
+ * file: FrSetup.java
+ * authors: Jacob Kim, James Lee, Jorge Luis Carrera
+ * class: CS 245 - Graphical User Interfaces
+ * 
+ * assignment: Program 1
+ * date last modified: 10/10/2017
+ * 
+ * purpose: This program runs a hangman game with the ability to freely
+ * view credits, high scores, or start another game.
+ */
+
 public class FrSetup extends JFrame implements ActionListener{
     static Timer timer;
     String[] wordList = {"abstract", "cemetery", "nurse", "pharmacy","climbing"};
@@ -21,12 +33,14 @@ public class FrSetup extends JFrame implements ActionListener{
     int level = (int) (Math.random() * 5);
     int wrong;
     int right;
-    //int[] wordLength = new int[5];
+    int scoreVal = 100;
+    int[] scorePos = new int[5];
     String letter;
     boolean jumpToEnd = false;
     JLabel img = new JLabel(bg, JLabel.CENTER);
    
-    
+    //method: inSet
+    //purpose: Sets up the main frame.
     public void inSet(){
         setTitle("CS245 Team Pending Hangman");
         setPreferredSize(new Dimension(600,400));
@@ -36,15 +50,19 @@ public class FrSetup extends JFrame implements ActionListener{
         setLocationRelativeTo(null);
     }
     
+    //method: wipe
+    //purpose: Refreshes the current visible panel on the frame.
     public void wipe(){
         getContentPane().removeAll();
         revalidate();
     }
     
+    //method: titleCard
+    //purpose: Produces the title card panel.
     public void titleCard(){
         JLabel Title = new JLabel("CS 245 Quarter Project");
         Title.setForeground(Color.white);
-        Title.setFont(new Font("Papyrus", Font.PLAIN, 30));
+        Title.setFont(new Font("Papyrus", Font.PLAIN, 48));
         JLabel teamName = new JLabel("By: Team Name Pending");
         teamName.setForeground(Color.white);
         JPanel LPanel = new JPanel();
@@ -60,6 +78,8 @@ public class FrSetup extends JFrame implements ActionListener{
         add(MPanel);
     }
     
+    //method: Menu
+    //purpose: Produces the main menu panels.
     public void Menu(){
         JPanel mBackground = new JPanel(new BorderLayout());
         JPanel divider = new JPanel(new BorderLayout());
@@ -94,6 +114,8 @@ public class FrSetup extends JFrame implements ActionListener{
         setVisible(true);
     }
     
+    //method: Play
+    //purpose: Sets the background and buttons for the hangman game screen.
     public void Play(){
         JPanel backPanel = new JPanel(new BorderLayout());
         backPanel.setBackground(Color.white);
@@ -274,9 +296,11 @@ public class FrSetup extends JFrame implements ActionListener{
         gameStart();
     }
     
+    //method: gameStart
+    //purpose: Handles the game logic and image updating for the game.
     public void gameStart() {
         bg = new ImageIcon("hangman_0.jpg");
-        score.setText("100");
+        score.setText(Integer.toString(scoreVal));
         level = (int) (Math.random() * 5);
         letter = "";
         for(int k = 0; k <wordList[level].length(); k++){
@@ -332,38 +356,46 @@ public class FrSetup extends JFrame implements ActionListener{
         right = 0;
     }
    
+    //method: detract
+    //purpose: Updates score and image when called by buttons.
     public void detract(String let) {
         if (!wordList[level].contains(let)) {
             wrong++;
             if (wrong == 1) {
                 bg = new ImageIcon("hangman_1.jpg");
                 img.setIcon(bg);
-                score.setText("90");
+                scoreVal -= 10;
+                score.setText(Integer.toString(scoreVal));
             }
             if (wrong == 2) {
                 bg = new ImageIcon("hangman_2.jpg");
                 img.setIcon(bg);
-                score.setText("80");
+                scoreVal -= 10;
+                score.setText(Integer.toString(scoreVal));
             }
             if (wrong == 3) {
                 bg = new ImageIcon("hangman_3.jpg");
                 img.setIcon(bg);
-                score.setText("70");
+                scoreVal -= 10;
+                score.setText(Integer.toString(scoreVal));
             }
             if (wrong == 4) {
                 bg = new ImageIcon("hangman_4.jpg");
                 img.setIcon(bg);
-                score.setText("60");
+                scoreVal -= 10;
+                score.setText(Integer.toString(scoreVal));
             }
             if (wrong == 5) {
                 bg = new ImageIcon("hangman_5.jpg");
                 img.setIcon(bg);
-                score.setText("50");
+                scoreVal -= 10;
+                score.setText(Integer.toString(scoreVal));
             }
             if (wrong == 6) {
                 bg = new ImageIcon("hangman_6.jpg");
                 img.setIcon(bg);
-                score.setText("40");
+                scoreVal -= 10;
+                score.setText(Integer.toString(scoreVal));
                 level = (int) (Math.random() * 64);
                 getContentPane().removeAll();
                 EndGame();
@@ -380,6 +412,8 @@ public class FrSetup extends JFrame implements ActionListener{
         }
     }
     
+    //method: updateHint
+    //purpose: Updates the correct guess letters above the word spaces.
     public void updateHint(String let){
         char a = let.charAt(0);
         char[] word = wordList[level].toCharArray();
@@ -396,6 +430,8 @@ public class FrSetup extends JFrame implements ActionListener{
         labelTitle.setText(temp);
     }
     
+    //method: Credits
+    //purpose: Produces the credit screen panels.
     public void Credits(){
         BSet b = new BSet();
         b.back();
@@ -431,8 +467,12 @@ public class FrSetup extends JFrame implements ActionListener{
         add(backPanel,BorderLayout.SOUTH);
     }
 
+    
+    //method: ScoreBoard
+    //purpose: Produces the high score board screen panels.
     public void ScoreBoard(){
         
+        HSFiler hsf = new HSFiler();
         BSet b = new BSet();
         b.back();
         JPanel backPanel = new JPanel();
@@ -442,21 +482,24 @@ public class FrSetup extends JFrame implements ActionListener{
         b.addActionListener(this);
         
         
-        int [] s = new int[5];
+        String[] str = new String[5];
+        
+        str = hsf.getHS();
+        int [] s = hsf.returnScores();
         JLabel Header = new JLabel("HIGHSCORES");
         Header.setFont(new Font("Papyrus", Font.PLAIN, 30));
         Header.setHorizontalAlignment(JLabel.CENTER);
         JPanel ScoreList = new JPanel();
         ScoreList.setBackground(Color.BLUE);
-        JLabel Score1 = new JLabel("ABC....."+String.valueOf(s[0]));
+        JLabel Score1 = new JLabel(str[0]);
         Score1.setHorizontalAlignment(JLabel.CENTER);
-        JLabel Score2 = new JLabel("ABC....."+String.valueOf(s[1]));
+        JLabel Score2 = new JLabel(str[1]);
         Score2.setHorizontalAlignment(JLabel.CENTER);
-        JLabel Score3 = new JLabel("ABC....."+String.valueOf(s[2]));
+        JLabel Score3 = new JLabel(str[2]);
         Score3.setHorizontalAlignment(JLabel.CENTER);
-        JLabel Score4 = new JLabel("ABC....."+String.valueOf(s[3]));
+        JLabel Score4 = new JLabel(str[3]);
         Score4.setHorizontalAlignment(JLabel.CENTER);
-        JLabel Score5 = new JLabel("ABC....."+String.valueOf(s[4]));
+        JLabel Score5 = new JLabel(str[4]);
         Score5.setHorizontalAlignment(JLabel.CENTER);
         
         
@@ -471,6 +514,8 @@ public class FrSetup extends JFrame implements ActionListener{
         add(backPanel,BorderLayout.SOUTH);
     }
     
+    //method: EndGame
+    //purpose: Produces the post game panels with appropriate score.
     public void EndGame(){
         BSet b = new BSet();
         b.end();
@@ -513,6 +558,9 @@ public class FrSetup extends JFrame implements ActionListener{
         add(backPanel, BorderLayout.SOUTH);
     }
     
+    //method: actionPerformed
+    //purpose: Overrides actionPerformed method for action events,
+    //  handles button logic.
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Cred")){
             getContentPane().removeAll();

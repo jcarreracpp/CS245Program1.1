@@ -2,8 +2,22 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.*;
+
+/**
+ * file: BSet.java
+ * authors: Jacob Kim, James Lee, Jorge Luis Carrera
+ * class: CS 245 - Graphical User Interfaces
+ * 
+ * assignment: Program 1
+ * date last modified: 10/10/2017
+ * 
+ * purpose: This program runs a hangman game with the ability to freely
+ * view credits, high scores, or start another game.
+ */
+
 public class BSet extends JButton{
-    
+    //method: back
+    //purpose: Sets a button to be a back button.
     public void back(){
         setText("Back");
         setActionCommand("MM");
@@ -11,7 +25,8 @@ public class BSet extends JButton{
         setBackground(Color.WHITE);
         
     }
-    
+    //method: end
+    //purpose: Sets a button to be an end button.
     public void end(){
         setText("End");
         setActionCommand("MM");
@@ -19,7 +34,8 @@ public class BSet extends JButton{
         setBackground(Color.WHITE);
         
     }
-    
+    //method: skip
+    //purpose: Sets a button to be a skip button.
     public void skip(){
         setText("Skip");
         setActionCommand("Skip");
@@ -27,7 +43,8 @@ public class BSet extends JButton{
         setBackground(Color.WHITE);
         
     }
-    
+    //method: Score
+    //purpose: Sets a button to be a Score button.
     public void Score(){
         setText("Highscores");
         setActionCommand("Scores");
@@ -36,7 +53,8 @@ public class BSet extends JButton{
         setBackground(Color.BLUE);
         setPreferredSize(new Dimension(100,50));
     }
-    
+    //method: Cred
+    //purpose: Sets a button to be a Credits button.
     public void Cred(){
         setText("Credits");
         setActionCommand("Cred");
@@ -46,7 +64,8 @@ public class BSet extends JButton{
         setPreferredSize(new Dimension(100,50));
         
     }
-    
+    //method: Play
+    //purpose: Sets a button to be a Play button.
     public void Play(){
         setText("Play");
         setActionCommand("Play");
@@ -56,6 +75,9 @@ public class BSet extends JButton{
         setPreferredSize(new Dimension(100,50));
     }
     
+    
+    //method: A
+    //purpose: Sets a button to be an A button.
     public void A()
     {
         setText("A");
@@ -64,6 +86,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: B
+    //purpose: Sets a button to be a B button.
     public void B()
     {
         setText("B");
@@ -72,6 +96,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: C
+    //purpose: Sets a button to be a C button.
     public void C()
     {
         setText("C");
@@ -80,6 +106,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: D
+    //purpose: Sets a button to be a D button.
     public void D()
     {
         setText("D");
@@ -88,6 +116,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: E
+    //purpose: Sets a button to be an E button.
     public void E()
     {
 
@@ -97,6 +127,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: F
+    //purpose: Sets a button to be an F button.
     public void F()
     {
         setText("F");
@@ -105,6 +137,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: G
+    //purpose: Sets a button to be a G button.
     public void G()
     {
         setText("G");
@@ -113,6 +147,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: H
+    //purpose: Sets a button to be an H button.
     public void H()
     {
         setText("H");
@@ -121,6 +157,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: I
+    //purpose: Sets a button to be an I button.
     public void I()
     {
         setText("I");
@@ -129,6 +167,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: J
+    //purpose: Sets a button to be a J button.
     public void J()
     {
         setText("J");
@@ -137,6 +177,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: K
+    //purpose: Sets a button to be a K button.
     public void K()
     {
         setText("K");
@@ -145,6 +187,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: L
+    //purpose: Sets a button to be a L button.
     public void L()
     {
         setText("L");
@@ -153,6 +197,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: M
+    //purpose: Sets a button to be an M button.
     public void M()
     {
         setText("M");
@@ -161,6 +207,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: N
+    //purpose: Sets a button to be an N button.
     public void N()
     {
         setText("N");
@@ -169,6 +217,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: O
+    //purpose: Sets a button to be an O button.
     public void O()
     {
         setText("O");
@@ -177,6 +227,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: P
+    //purpose: Sets a button to be a P button.
     public void P()
     {
         setText("P");
@@ -185,6 +237,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: Q
+    //purpose: Sets a button to be a Q button.
     public void Q()
     {
         setText("Q");
@@ -193,6 +247,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: R
+    //purpose: Sets a button to be an R button.
     public void R()
     {
         setText("R");
@@ -201,6 +257,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: S
+    //purpose: Sets a button to be an S button.
     public void S()
     {
         setText("S");
@@ -209,6 +267,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: T
+    //purpose: Sets a button to be a T button.
     public void T()
     {
         setText("T");
@@ -217,6 +277,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: U
+    //purpose: Sets a button to be a U button.
     public void U()
     {
         setText("U");
@@ -225,6 +287,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: V
+    //purpose: Sets a button to be a V button.
     public void V()
     {
         setText("V");
@@ -233,6 +297,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: W
+    //purpose: Sets a button to be a W button.
     public void W()
     {
         setText("W");
@@ -241,6 +307,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: X
+    //purpose: Sets a button to be an X button.
     public void X()
     {
         setText("X");
@@ -249,6 +317,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: Y
+    //purpose: Sets a button to be a Y button.
     public void Y()
     {
         setText("Y");
@@ -257,6 +327,8 @@ public class BSet extends JButton{
         setForeground(Color.WHITE);
         setBackground(Color.BLUE);
     }
+    //method: Z
+    //purpose: Sets a button to be a Z button.
     public void Z()
     {
         setText("Z");

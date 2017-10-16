@@ -1,11 +1,25 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+/**
+ * file: main.java
+ * authors: Jacob Kim, James Lee, Jorge Luis Carrera
+ * class: CS 245 - Graphical User Interfaces
+ * 
+ * assignment: Program 1
+ * date last modified: 10/10/2017
+ * 
+ * purpose: This program runs a hangman game with the ability to freely
+ * view credits, high scores, or start another game.
+ */
+
+
 public class main{
     private static Timer timer;
-    /**
-     * @param args the command line arguments
-     */
+
+    //method: main
+    //purpose: Starts the program.
     public static void main(String[] args) {
         FrSetup wind = new FrSetup();
         wind.inSet();
@@ -26,8 +40,6 @@ public class main{
         wind.titleCard();
 
         timer.start();
-        
-        
     }
         
     
