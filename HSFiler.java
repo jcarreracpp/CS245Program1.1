@@ -1,4 +1,5 @@
 
+import com.sun.xml.internal.ws.util.StringUtils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -64,7 +65,7 @@ public class HSFiler {
             
             for (int i = 0; i < hs.length; i++) {
                 temp = hs[i];
-                bw.write(temp + "\n");
+                bw.write(temp + "\r\n");
             }
             bw.close();
         } catch (Exception e) {
@@ -75,22 +76,23 @@ public class HSFiler {
     
     public void addNewHS(String name, int score, int position){
         String[] toAdd = getHS();
-        String[] temp = toAdd;
+        String[] temp = getHS();
         
         for(int j = position; j < toAdd.length; j++){
             if(j == position){
-                name = name + "..." + score;
+                name = name + "..." + ("000000" + Integer.toString(score)).substring(Integer.toString(score).length());
                 toAdd[j] = name;
             }else{
-                toAdd[j] = temp[j--];
+                toAdd[j] = temp[(j - 1)];
             }
         }
+        setHS(toAdd);
     }
-    
+
     public int[] returnScores(){
         String[] scores = getHS();
         int[] score = new int[scores.length];
-        
+
         for(int k = 0; k < scores.length; k++){
             score[k] = Integer.parseInt(scores[k].substring((scores[k].length()-6),scores[k].length()));
         }

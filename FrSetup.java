@@ -34,7 +34,7 @@ public class FrSetup extends JFrame implements ActionListener{
     int wrong;
     int right;
     int scoreVal = 100;
-    int[] scorePos = new int[5];
+    int[] scorePos = new int[]{0, 0, 0, 0, 0};
     String letter;
     boolean jumpToEnd = false;
     JLabel img = new JLabel(bg, JLabel.CENTER);
@@ -481,11 +481,13 @@ public class FrSetup extends JFrame implements ActionListener{
         backPanel.add(b);
         b.addActionListener(this);
         
-        
         String[] str = new String[5];
         
         str = hsf.getHS();
-        int [] s = hsf.returnScores();
+        
+
+        
+        //scorePos = hsf.returnScores();
         JLabel Header = new JLabel("HIGHSCORES");
         Header.setFont(new Font("Papyrus", Font.PLAIN, 30));
         Header.setHorizontalAlignment(JLabel.CENTER);
@@ -512,12 +514,15 @@ public class FrSetup extends JFrame implements ActionListener{
         ScoreList.add(Score5);
         add(ScoreList);
         add(backPanel,BorderLayout.SOUTH);
+        
+
     }
     
     //method: EndGame
     //purpose: Produces the post game panels with appropriate score.
     public void EndGame(){
         BSet b = new BSet();
+        HSFiler hsf = new HSFiler();
         b.end();
         JPanel backPanel = new JPanel();
         JPanel backGround = new JPanel(new GridLayout(4,0));
@@ -554,8 +559,22 @@ public class FrSetup extends JFrame implements ActionListener{
         centerPanel.add(backGround);
         centerPanel.add(emptyP2);
         
+        boolean hsCheck = true;
+        scorePos = hsf.returnScores();
+        for(int mk = 0; mk < scorePos.length; mk++){
+            if(scoreVal >= scorePos[mk] && hsCheck){
+                String initials = JOptionPane.showInputDialog("Type your initials! (3 characters)");
+                if(initials.length() > 3){
+                    initials = initials.substring(0, 3);
+                }
+                hsf.addNewHS(initials, scoreVal, mk);
+                hsCheck = false;
+            }
+        }
+        
         add(centerPanel);
         add(backPanel, BorderLayout.SOUTH);
+        scoreVal = 100;
     }
     
     //method: actionPerformed
