@@ -19,6 +19,7 @@ public class Stp extends JFrame implements ActionListener {
     private JButton yb = new JButton();
     private JButton gb = new JButton();
     private JButton pb = new JButton();
+    FrSetup frs = new FrSetup();
     private int wrongCounter = 0;
 
     private int Score = 100;   //dummy score variable; replace with real one
@@ -111,18 +112,37 @@ public class Stp extends JFrame implements ActionListener {
             LvTwo();
             revalidate();
 
-        } else if (e.getActionCommand().equals("Right2")) {
+        }
+        if (e.getActionCommand().equals("Right2")) {
+            FrSetup.scoreVal += 100;
             LvThree();
             l.setText("Blue");
             l.setForeground(Color.orange);
             revalidate();
-        } else if (e.getActionCommand().equals("Right3")) {
-            /*
-                    insert method to exit to scoreboard here
-             */
+        }
+        if (e.getActionCommand().equals("Right3")) {
+            FrSetup.scoreVal += 100;
 
-        } else if (e.getActionCommand().equals("w")) {
-            
+            frs.EndGame();
+
+        }
+        if (e.getActionCommand().equals("w")) {
+            if(wrongCounter == 0){
+                l.setText("Green");
+                l.setForeground(Color.blue);
+                l.setVisible(true);
+                LvTwo();
+                revalidate();
+                wrongCounter++;
+            }else if(wrongCounter == 1){
+                LvThree();
+                l.setText("Blue");
+                l.setForeground(Color.orange);
+                revalidate();
+                wrongCounter++;
+            }else if(wrongCounter == 2){
+                frs.EndGame();
+            }
         }
     }
 

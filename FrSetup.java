@@ -23,22 +23,31 @@ import javax.swing.*;
  */
 
 public class FrSetup extends JFrame implements ActionListener{
-    static Timer timer;
-    String[] wordList = {"abstract", "cemetery", "nurse", "pharmacy","climbing"};
+    int wrong;
+    int right;
     int[] uniqueList = {6, 6, 5, 7, 7};
+    int[] scorePos = new int[]{0, 0, 0, 0, 0};
+    static Timer timer;
+    JButton rb = new JButton();
+    JButton bb = new JButton();
+    JButton yb = new JButton();
+    JButton gb = new JButton();
+    JButton pb = new JButton();
+    int wrongCounter = 0;
+    String[] wordList = {"abstract", "cemetery", "nurse", "pharmacy","climbing"};
     JTextField textField = new JTextField();
     JLabel labelTitle = new JLabel();
     JLabel score = new JLabel();
+    JPanel p = new JPanel();
+    public JLabel l = new JLabel("Red");
     ImageIcon bg = new ImageIcon();
     int level = (int) (Math.random() * 5);
-    int wrong;
-    int right;
     public static int scoreVal = 100;
-    int[] scorePos = new int[]{0, 0, 0, 0, 0};
     String letter;
-    boolean jumpToEnd = false;
     JLabel img = new JLabel(bg, JLabel.CENTER);
    
+    public void FrSetup(){}
+    
     //method: inSet
     //purpose: Sets up the main frame.
     public void inSet(){
@@ -398,7 +407,7 @@ public class FrSetup extends JFrame implements ActionListener{
                 score.setText(Integer.toString(scoreVal));
                 level = (int) (Math.random() * 64);
                 getContentPane().removeAll();
-                EndGame();
+                set();
                 revalidate();
             }
         }else{
@@ -406,7 +415,7 @@ public class FrSetup extends JFrame implements ActionListener{
             right++;
             if(right == uniqueList[level]){
                 getContentPane().removeAll();
-                EndGame();
+                set();
                 revalidate();
             }
         }
@@ -471,7 +480,7 @@ public class FrSetup extends JFrame implements ActionListener{
     //method: ScoreBoard
     //purpose: Produces the high score board screen panels.
     public void ScoreBoard(){
-        
+        scoreVal = 100;
         HSFiler hsf = new HSFiler();
         BSet b = new BSet();
         b.back();
@@ -563,18 +572,128 @@ public class FrSetup extends JFrame implements ActionListener{
         scorePos = hsf.returnScores();
         for(int mk = 0; mk < scorePos.length; mk++){
             if(scoreVal >= scorePos[mk] && hsCheck){
-                String initials = JOptionPane.showInputDialog("Type your initials! (3 characters)");
+                String initials;
+                initials = JOptionPane.showInputDialog("Type your initials! (3 characters)");
+                if(initials.isEmpty()){
+                    initials = "ABC";
+                }
                 if(initials.length() > 3){
                     initials = initials.substring(0, 3);
                 }
                 hsf.addNewHS(initials, scoreVal, mk);
+                scoreVal = 0;
                 hsCheck = false;
             }
         }
         
         add(centerPanel);
         add(backPanel, BorderLayout.SOUTH);
-        scoreVal = 100;
+    }
+    
+    public void set() {
+
+        l.setForeground(Color.magenta);
+        l.setLocation(600 / 2 - 50, 10);
+        l.setBackground(Color.black);
+        l.setSize(50, 50);
+        l.setVisible(true);
+
+        p.setLayout(null);
+        p.setSize(600, 400);
+        p.setBackground(Color.black);
+        p.add(l);
+
+        rb.setIcon(new ImageIcon("cs_245_red_circle.png"));
+        bb.setIcon(new ImageIcon("cs_245_blue_circle.png"));
+        yb.setIcon(new ImageIcon("cs_245_yellow_circle.png"));
+        gb.setIcon(new ImageIcon("cs_245_green_circle.png"));
+        pb.setIcon(new ImageIcon("cs_245_purple_circle.png"));
+        rb.setRolloverIcon(new ImageIcon("red_h.png"));
+        bb.setRolloverIcon(new ImageIcon("blue_h.png"));
+        yb.setRolloverIcon(new ImageIcon("yellow_h.png"));
+        gb.setRolloverIcon(new ImageIcon("green_h.png"));
+        pb.setRolloverIcon(new ImageIcon("purple_h.png"));
+        
+        add(p);
+        LvOne();
+
+    }
+
+    public void BSup(JPanel p, JButton r, int x, int y, String s) {
+        r.setLocation(x, y);
+        r.setSize(100, 100);
+        r.setBorderPainted(false);
+        r.setContentAreaFilled(false);
+        r.setActionCommand(s);
+        r.addActionListener(this);
+        p.add(r);
+    }
+
+    public void LvOne() {
+        p.removeAll();
+        p.add(l);
+        BSup(p, bb, 50, 50, "wrn1");
+        BSup(p, rb, 200, 75, "wrn1");
+        BSup(p, yb, 400, 20, "wrn1");
+        BSup(p, gb, 20, 200, "wrn1");
+        BSup(p, pb, 400, 180, "Right1");
+        //p.revalidate();
+        //revalidate();
+        repaint();
+
+    }
+
+    public void LvTwo() {
+        p.removeAll();
+        p.add(l);
+        BSup(p, bb, 75, 80, "wrn2");
+        BSup(p, rb, 340, 220, "wrn2");
+        BSup(p, gb, 405, 98, "Right2");
+        BSup(p, pb, 200, 120, "wrn2");
+        BSup(p, yb, 25, 245, "wrn2");
+        //p.revalidate();
+        //revalidate();
+        repaint();
+
+    }
+
+    public void LvThree() {
+        p.removeAll();
+        p.add(l);
+        BSup(p, bb, 400, 10, "Right3");
+        BSup(p, rb, 100, 50, "wrn3");
+        BSup(p, gb, 10, 200, "wrn3");
+        BSup(p, pb, 140, 250, "wrn3");
+        BSup(p, yb, 287, 170, "wrn3");
+        //p.revalidate();
+        //revalidate();
+        repaint();
+    }
+    
+    public void LvFour(){
+        p.removeAll();
+        p.add(l);
+        BSup(p, bb, 400, 10, "wrn4");
+        BSup(p, rb, 75, 25, "wrn4");
+        BSup(p, gb, 10, 200, "wrn4");
+        BSup(p, pb, 500, 250, "Right4");
+        BSup(p, yb, 100, 100, "wrn4");
+        //p.revalidate();
+        //revalidate();
+        repaint();
+    }
+    
+    public void LvFive(){
+        p.removeAll();
+        p.add(l);
+        BSup(p, bb, 400, 10, "wrn5");
+        BSup(p, rb, 100, 50, "Right5");
+        BSup(p, gb, 10, 200, "wrn5");
+        BSup(p, pb, 140, 250, "wrn5");
+        BSup(p, yb, 287, 170, "wrn5");
+        //p.revalidate();
+        //revalidate();
+        repaint();
     }
     
     //method: actionPerformed
@@ -605,10 +724,9 @@ public class FrSetup extends JFrame implements ActionListener{
         }
         if(e.getActionCommand().equals("Skip")){
             getContentPane().removeAll();
-            EndGame();
+            set();
             revalidate();
             score.setText("0");
-            jumpToEnd = true;
         }
         if(e.getActionCommand().equals("A")){
             JButton pButton= (JButton) e.getSource();
@@ -766,6 +884,69 @@ public class FrSetup extends JFrame implements ActionListener{
             pButton.setEnabled(false);
             pButton.setBackground(Color.DARK_GRAY);
             detract("z");
+        }
+        
+        if (e.getActionCommand().equals("Right1")) {
+            System.out.println("RIGHT ONE");
+            scoreVal += 100;
+            l.setText("Blue");
+            l.setForeground(Color.green);
+            LvTwo();
+            revalidate();
+
+        }
+        if (e.getActionCommand().equals("Right2")) {
+            System.out.println("RIGHT TWO");
+            scoreVal += 100;
+            l.setText("Orange");
+            l.setForeground(Color.blue);
+            LvThree();
+            revalidate();
+        }
+        if (e.getActionCommand().equals("Right3")) {
+            System.out.println("RIGHT THREE");
+            scoreVal += 100;
+            l.setText("Yellow");
+            l.setForeground(Color.magenta);
+            LvFour();
+
+        }
+        if (e.getActionCommand().equals("Right4")) {
+            System.out.println("RIGHT Four");
+            scoreVal += 100;
+            l.setText("Green");
+            l.setForeground(Color.red);
+            LvFive();
+
+        }
+        if (e.getActionCommand().equals("Right5")) {
+            scoreVal += 100;
+            EndGame();
+        }
+        if (e.getActionCommand().equals("wrn1")) {
+            l.setText("Blue");
+            l.setForeground(Color.green);
+            LvTwo();
+            revalidate();
+        }
+        if (e.getActionCommand().equals("wrn2")) {
+            l.setText("Orange");
+            l.setForeground(Color.blue);
+            LvThree();
+            revalidate();
+        }
+        if (e.getActionCommand().equals("wrn3")) {
+            l.setText("Yellow");
+            l.setForeground(Color.magenta);
+            LvFour();
+        }
+        if (e.getActionCommand().equals("wrn4")) {
+            l.setText("Green");
+            l.setForeground(Color.red);
+            LvFive();
+        }        
+        if (e.getActionCommand().equals("wrn5")) {
+            EndGame();
         }
     }
 }
