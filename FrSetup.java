@@ -45,8 +45,6 @@ public class FrSetup extends JFrame implements ActionListener{
     public static int scoreVal = 100;
     String letter;
     JLabel img = new JLabel(bg, JLabel.CENTER);
-   
-    public void FrSetup(){}
     
     //method: inSet
     //purpose: Sets up the main frame.
@@ -111,7 +109,8 @@ public class FrSetup extends JFrame implements ActionListener{
         BSet C = new BSet();
         C.Cred();
         C.addActionListener(this);
-        
+        scoreVal = 100;
+                
         buttonList.add(P);
         buttonList.add(H);
         buttonList.add(C);
@@ -480,7 +479,6 @@ public class FrSetup extends JFrame implements ActionListener{
     //method: ScoreBoard
     //purpose: Produces the high score board screen panels.
     public void ScoreBoard(){
-        scoreVal = 100;
         HSFiler hsf = new HSFiler();
         BSet b = new BSet();
         b.back();
@@ -558,7 +556,7 @@ public class FrSetup extends JFrame implements ActionListener{
         title.setText("Score:");
 
         score.setFont(new Font("Papyrus", Font.PLAIN, 30));
-
+        score.setText(Integer.toString(scoreVal));
 
         backGround.add(empty);
         backGround.add(title);
@@ -572,8 +570,8 @@ public class FrSetup extends JFrame implements ActionListener{
         scorePos = hsf.returnScores();
         for(int mk = 0; mk < scorePos.length; mk++){
             if(scoreVal >= scorePos[mk] && hsCheck){
-                String initials;
-                initials = JOptionPane.showInputDialog("Type your initials! (3 characters)");
+                String initials = "";
+                initials += JOptionPane.showInputDialog("Type your initials! (3 characters)");
                 if(initials.isEmpty()){
                     initials = "ABC";
                 }
@@ -581,7 +579,6 @@ public class FrSetup extends JFrame implements ActionListener{
                     initials = initials.substring(0, 3);
                 }
                 hsf.addNewHS(initials, scoreVal, mk);
-                scoreVal = 0;
                 hsCheck = false;
             }
         }
@@ -590,6 +587,8 @@ public class FrSetup extends JFrame implements ActionListener{
         add(backPanel, BorderLayout.SOUTH);
     }
     
+    //method: set
+    //purpose: Sets up the button pressing game after the hangman game.
     public void set() {
 
         l.setForeground(Color.magenta);
@@ -614,85 +613,102 @@ public class FrSetup extends JFrame implements ActionListener{
         gb.setRolloverIcon(new ImageIcon("green_h.png"));
         pb.setRolloverIcon(new ImageIcon("purple_h.png"));
         
+        if (rb.getActionListeners().length == 0) {
+            rb.addActionListener(this);
+        }
+
+        if (bb.getActionListeners().length == 0) {
+            bb.addActionListener(this);
+        }
+
+        if (yb.getActionListeners().length == 0) {
+            yb.addActionListener(this);
+        }
+
+        if (gb.getActionListeners().length == 0) {
+            gb.addActionListener(this);
+        }
+
+        if (pb.getActionListeners().length == 0) {
+            pb.addActionListener(this);
+        }
+
+        p.add(bb);
+        p.add(rb);
+        p.add(yb);
+        p.add(gb);
+        p.add(pb);
         add(p);
         LvOne();
-
     }
 
-    public void BSup(JPanel p, JButton r, int x, int y, String s) {
+    //method: BSup
+    //purpose: Changes button location and action effect.
+    public void BSup(JPanel pan, JButton r, int x, int y, String s) {
         r.setLocation(x, y);
         r.setSize(100, 100);
         r.setBorderPainted(false);
         r.setContentAreaFilled(false);
         r.setActionCommand(s);
-        r.addActionListener(this);
-        p.add(r);
     }
-
+    
+    //method: LvOne
+    //purpose: Mapping for level 1 of the button minigame.
     public void LvOne() {
-        p.removeAll();
-        p.add(l);
         BSup(p, bb, 50, 50, "wrn1");
         BSup(p, rb, 200, 75, "wrn1");
         BSup(p, yb, 400, 20, "wrn1");
         BSup(p, gb, 20, 200, "wrn1");
         BSup(p, pb, 400, 180, "Right1");
-        //p.revalidate();
-        //revalidate();
+        revalidate();
         repaint();
-
     }
 
+    //method: LvTwo
+    //purpose: Mapping for level 2 of the button minigame.
     public void LvTwo() {
-        p.removeAll();
-        p.add(l);
         BSup(p, bb, 75, 80, "wrn2");
         BSup(p, rb, 340, 220, "wrn2");
         BSup(p, gb, 405, 98, "Right2");
         BSup(p, pb, 200, 120, "wrn2");
         BSup(p, yb, 25, 245, "wrn2");
-        //p.revalidate();
-        //revalidate();
+        revalidate();
         repaint();
-
     }
 
+    //method: LvThree
+    //purpose: Mapping for level 3 of the button minigame.
     public void LvThree() {
-        p.removeAll();
-        p.add(l);
         BSup(p, bb, 400, 10, "Right3");
         BSup(p, rb, 100, 50, "wrn3");
-        BSup(p, gb, 10, 200, "wrn3");
+        BSup(p, gb, 390, 245, "wrn3");
         BSup(p, pb, 140, 250, "wrn3");
         BSup(p, yb, 287, 170, "wrn3");
-        //p.revalidate();
-        //revalidate();
+        revalidate();
         repaint();
     }
     
+    //method: LvFour
+    //purpose: Mapping for level 4 of the button minigame.
     public void LvFour(){
-        p.removeAll();
-        p.add(l);
-        BSup(p, bb, 400, 10, "wrn4");
-        BSup(p, rb, 75, 25, "wrn4");
+        BSup(p, bb, 375, 60, "wrn4");
+        BSup(p, rb, 200, 150, "wrn4");
         BSup(p, gb, 10, 200, "wrn4");
-        BSup(p, pb, 500, 250, "Right4");
+        BSup(p, pb, 450, 250, "Right4");
         BSup(p, yb, 100, 100, "wrn4");
-        //p.revalidate();
-        //revalidate();
+        revalidate();
         repaint();
     }
     
+    //method: LvFive
+    //purpose: Mapping for level 5 of the button minigame.
     public void LvFive(){
-        p.removeAll();
-        p.add(l);
-        BSup(p, bb, 400, 10, "wrn5");
-        BSup(p, rb, 100, 50, "Right5");
-        BSup(p, gb, 10, 200, "wrn5");
-        BSup(p, pb, 140, 250, "wrn5");
-        BSup(p, yb, 287, 170, "wrn5");
-        //p.revalidate();
-        //revalidate();
+        BSup(p, bb, 475, 235, "wrn5");
+        BSup(p, rb, 327, 190, "Right5");
+        BSup(p, gb, 400, 10, "wrn5");
+        BSup(p, pb, 100, 50, "wrn5");
+        BSup(p, yb, 140, 250, "wrn5");
+        revalidate();
         repaint();
     }
     
@@ -726,7 +742,7 @@ public class FrSetup extends JFrame implements ActionListener{
             getContentPane().removeAll();
             set();
             revalidate();
-            score.setText("0");
+            scoreVal = 0;
         }
         if(e.getActionCommand().equals("A")){
             JButton pButton= (JButton) e.getSource();
@@ -887,24 +903,19 @@ public class FrSetup extends JFrame implements ActionListener{
         }
         
         if (e.getActionCommand().equals("Right1")) {
-            System.out.println("RIGHT ONE");
             scoreVal += 100;
             l.setText("Blue");
             l.setForeground(Color.green);
             LvTwo();
-            revalidate();
 
         }
         if (e.getActionCommand().equals("Right2")) {
-            System.out.println("RIGHT TWO");
             scoreVal += 100;
             l.setText("Orange");
             l.setForeground(Color.blue);
             LvThree();
-            revalidate();
         }
         if (e.getActionCommand().equals("Right3")) {
-            System.out.println("RIGHT THREE");
             scoreVal += 100;
             l.setText("Yellow");
             l.setForeground(Color.magenta);
@@ -912,7 +923,6 @@ public class FrSetup extends JFrame implements ActionListener{
 
         }
         if (e.getActionCommand().equals("Right4")) {
-            System.out.println("RIGHT Four");
             scoreVal += 100;
             l.setText("Green");
             l.setForeground(Color.red);
@@ -921,19 +931,23 @@ public class FrSetup extends JFrame implements ActionListener{
         }
         if (e.getActionCommand().equals("Right5")) {
             scoreVal += 100;
+            wipe();
+            p.removeAll();
             EndGame();
+            revalidate();
+            repaint();
         }
         if (e.getActionCommand().equals("wrn1")) {
             l.setText("Blue");
             l.setForeground(Color.green);
             LvTwo();
-            revalidate();
+
         }
         if (e.getActionCommand().equals("wrn2")) {
             l.setText("Orange");
             l.setForeground(Color.blue);
             LvThree();
-            revalidate();
+
         }
         if (e.getActionCommand().equals("wrn3")) {
             l.setText("Yellow");
@@ -946,7 +960,11 @@ public class FrSetup extends JFrame implements ActionListener{
             LvFive();
         }        
         if (e.getActionCommand().equals("wrn5")) {
+            wipe();
+            p.removeAll();
             EndGame();
+            revalidate();
+            repaint();
         }
     }
 }

@@ -30,8 +30,6 @@ public class main{
                 timer.stop();
                 wind.wipe();
                 wind.Menu();
-
-                System.out.println("bub");
             }
         };
         timer = new Timer(3000, timedSwitch);
