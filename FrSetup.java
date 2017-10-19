@@ -33,7 +33,7 @@ public class FrSetup extends JFrame implements ActionListener{
     int level = (int) (Math.random() * 5);
     int wrong;
     int right;
-    int scoreVal = 100;
+    public static int scoreVal = 100;
     int[] scorePos = new int[]{0, 0, 0, 0, 0};
     String letter;
     boolean jumpToEnd = false;
