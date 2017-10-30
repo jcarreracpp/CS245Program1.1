@@ -16,7 +16,7 @@ import javax.swing.*;
  * class: CS 245 - Graphical User Interfaces
  * 
  * assignment: Program 1
- * date last modified: 10/10/2017
+ * date last modified: 10/29/2017
  * 
  * purpose: This program runs a hangman game with the ability to freely
  * view credits, high scores, or start another game.
@@ -712,9 +712,66 @@ public class FrSetup extends JFrame implements ActionListener{
         repaint();
     }
     
+    //method: sudokuBoard
+    //purpose: Returns a JPanel with the sudoku mini-games required objects.
     public void sudokuBoard(){
+        BSet b = new BSet();
+        BSet c = new BSet();
+        JPanel left = new JPanel(new GridLayout(10, 0));
+        JPanel right = new JPanel(new GridLayout(10, 0));
+        JPanel back = new JPanel(new BorderLayout());
+        
         SudokuBoard sb = new SudokuBoard();
-        sb.sudokuSetup(this);
+        JPanel sudokuB = sb.sudokuSetup(this);
+        b.submit();
+        b.addActionListener(this);
+        JPanel empty = new JPanel();    empty.setBackground(Color.white);    left.add(empty);
+        empty = new JPanel();    empty.setBackground(Color.white);   left.add(empty);    
+        empty = new JPanel();    empty.setBackground(Color.white);   left.add(empty);
+        empty = new JPanel();    empty.setBackground(Color.white);   left.add(empty);
+        empty = new JPanel();    empty.setBackground(Color.white);   left.add(empty);
+        empty = new JPanel();    empty.setBackground(Color.white);   left.add(empty);
+        empty = new JPanel();    empty.setBackground(Color.white);   left.add(empty);
+        empty = new JPanel();    empty.setBackground(Color.white);   left.add(empty);
+        empty = new JPanel();    empty.setBackground(Color.white);   left.add(empty);
+        left.add(b);
+        
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        JPanel timePlate = new JPanel();
+        timePlate.setBackground(Color.white);
+        JLabel time = new JLabel("--/--/---- --:--:--", JLabel.CENTER);
+        ActionListener actiondate = new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent ae) 
+            {
+                Date myDate = new Date();
+                time.setText(dateFormat.format(myDate));
+                        time.setBackground(Color.white);
+
+                }
+        };
+        new Timer(1000, actiondate).start();
+        
+        timePlate.add(time);
+        right.add(timePlate);
+        empty = new JPanel();    empty.setBackground(Color.white);   right.add(empty); 
+        empty = new JPanel();    empty.setBackground(Color.white);   right.add(empty); 
+        empty = new JPanel();    empty.setBackground(Color.white);   right.add(empty); 
+        empty = new JPanel();    empty.setBackground(Color.white);   right.add(empty); 
+        empty = new JPanel();    empty.setBackground(Color.white);   right.add(empty); 
+        empty = new JPanel();    empty.setBackground(Color.white);   right.add(empty); 
+        empty = new JPanel();    empty.setBackground(Color.white);   right.add(empty); 
+        empty = new JPanel();    empty.setBackground(Color.white);   right.add(empty); 
+        c.endSudoku();
+        c.addActionListener(this);
+        right.add(c);
+
+        
+        back.add(sudokuB, BorderLayout.CENTER);
+        back.add(left, BorderLayout.WEST);
+        back.add(right, BorderLayout.EAST);
+        add(back);
         sb.presets();
         revalidate();
         repaint();
@@ -729,7 +786,30 @@ public class FrSetup extends JFrame implements ActionListener{
             Credits();
             revalidate();
         }
-        
+        if(e.getActionCommand().equals("Submit")){
+            scoreVal += 540;
+            int wrongCount = 0;
+            for(int i = 0; i < 3; i++){
+                for(int j = 0; j < 3; j++){
+                    for(int k = 0; k < 3; k++){
+                        for(int m = 0; m < 3; m++){
+                            if(SudokuBoard.inputAnswers[i][j][k][m] != SudokuBoard.sectorUserAnswer[i][j][k][m]){
+                                wrongCount++;
+                            }
+                        }
+                    }
+                }
+            }
+            scoreVal = scoreVal - (wrongCount*10);
+            getContentPane().removeAll();
+            EndGame();
+            revalidate();
+        }
+        if(e.getActionCommand().equals("ES")){
+            getContentPane().removeAll();
+            EndGame();
+            revalidate();
+        }
         if(e.getActionCommand().equals("MM")){
             getContentPane().removeAll();
             Menu();

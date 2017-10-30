@@ -1,12 +1,23 @@
-import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+
+/**
+ * file: BSet.java
+ * authors: Jacob Kim, James Lee, Jorge Luis Carrera
+ * class: CS 245 - Graphical User Interfaces
+ * 
+ * assignment: Program 1
+ * date last modified: 10/29/2017
+ * 
+ * purpose: This program runs a hangman game with the ability to freely
+ * view credits, high scores, or start another game.
+ */
 
 public class SudokuBoard extends JFrame{
 
-   int[][]userAnswer = new int[9][9];
-   int[][][][] sectorUserAnswer = new int[3][3][3][3];
+   int[][] userAnswer = new int[9][9];
+   public static int[][][][] sectorUserAnswer = new int[3][3][3][3];
+   public static int[][][][] inputAnswers = new int[3][3][3][3];
    JPanel boardPanel = new JPanel();
    JPanel sector0 = new JPanel();
    JPanel sector1 = new JPanel();
@@ -19,14 +30,13 @@ public class SudokuBoard extends JFrame{
    JPanel sector8 = new JPanel();
    JPanel backPanel = new JPanel();
    
-   public void sudokuSetup(JFrame jf){
+   //method: sudokuSetup
+   //purpose: Initializes the components that make up the sudoku board.
+   public JPanel sudokuSetup(JFrame jf){
         String initText = " ";
         int dime = 35;
         initializeAnswers();
-      
-        //ik.setPreferredSize(new Dimension(dime, dime));
-        //ik.setMinimumSize(new Dimension(dime, dime));
-        //ik.setMaximumSize(new Dimension(dime, dime));
+        
         backPanel.setBackground(Color.white);
         boardPanel.setBackground(Color.black);
         boardPanel.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
@@ -160,122 +170,100 @@ public class SudokuBoard extends JFrame{
             System.out.println("Added " + (t+1));
      }
      backPanel.add(boardPanel);
-     jf.add(backPanel);
+     return backPanel;
      
    }
    
+   //method: presets
+   //purpose: Sets the disabled buttons into their respective sections on the
+   // sudoku board.
    public void presets(){
        sector0.add(new JButton("8"),0);
-       userAnswer[0][0] = 8;
        sector0.getComponent(0).setEnabled(false);
        
        sector0.add(new JButton("1"),7);
-       userAnswer[2][1] = 1;
        sector0.getComponent(7).setEnabled(false);  
        
        sector1.add(new JButton("4"),0);
-       userAnswer[0][3] = 4;
        sector1.getComponent(0).setEnabled(false);
        
        sector1.add(new JButton("6"),2);
-       userAnswer[0][5] = 6;
        sector1.getComponent(2).setEnabled(false);
        
        sector2.add(new JButton("7"),2);
-       userAnswer[0][8] = 7;
        sector2.getComponent(2).setEnabled(false);
        
        sector2.add(new JButton("4"),3);
-       userAnswer[1][6] = 4;
        sector2.getComponent(3).setEnabled(false);
        
        sector2.add(new JButton("6"),6);
-       userAnswer[2][6] = 6;
        sector2.getComponent(6).setEnabled(false);
        
        sector2.add(new JButton("5"),7);  
-       userAnswer[2][7] = 5;
        sector2.getComponent(7).setEnabled(false);
        
        sector3.add(new JButton("5"),0);
-       userAnswer[3][0] = 5;
        sector3.getComponent(0).setEnabled(false);
        
        sector3.add(new JButton("9"),2);
-       userAnswer[3][2] = 9;
        sector3.getComponent(2).setEnabled(false);
           
        sector3.add(new JButton("4"),7);
-       userAnswer[5][1] = 4;
        sector3.getComponent(7).setEnabled(false);
        
        sector3.add(new JButton("8"),8);
-       userAnswer[5][2] = 8;
        sector3.getComponent(8).setEnabled(false);
        
        sector4.add(new JButton("3"),1);
-       userAnswer[3][4] = 3;
        sector4.getComponent(1).setEnabled(false);
        
        sector4.add(new JButton("7"),4);
-       userAnswer[4][4] = 7;
        sector4.getComponent(4).setEnabled(false);
        
        sector4.add(new JButton("2"),7);
-       userAnswer[5][4] = 2;
        sector4.getComponent(7).setEnabled(false);
        
        sector5.add(new JButton("7"),0);
-       userAnswer[3][6] = 7;
        sector5.getComponent(0).setEnabled(false);
        
        sector5.add(new JButton("8"),1);
-       userAnswer[3][7] = 8;
        sector5.getComponent(1).setEnabled(false);
        
        sector5.add(new JButton("1"),6);
-       userAnswer[5][6] = 1;
        sector5.getComponent(6).setEnabled(false);
        
        sector5.add(new JButton("3"),8);
-       userAnswer[5][8] = 3;
        sector5.getComponent(8).setEnabled(false);
        
        sector6.add(new JButton("5"),1);
-       userAnswer[6][1] = 5;
        sector6.getComponent(1).setEnabled(false);
        
        sector6.add(new JButton("2"),2);
-       userAnswer[6][2] = 2;
        sector6.getComponent(2).setEnabled(false);
        
        sector6.add(new JButton("1"),5);
-       userAnswer[7][2] = 1;
        sector6.getComponent(5).setEnabled(false);
        
        sector6.add(new JButton("3"),6);
-       userAnswer[8][0] = 3;
        sector6.getComponent(6).setEnabled(false);
        
        sector7.add(new JButton("9"),6);    
-       userAnswer[8][3] = 9;
        sector7.getComponent(6).setEnabled(false);
        
        sector7.add(new JButton("2"),8);
-       userAnswer[8][6] = 2;
        sector7.getComponent(8).setEnabled(false);
        
        sector8.add(new JButton("9"),1);
-       userAnswer[6][7] = 9;
        sector8.getComponent(1).setEnabled(false);
        
        sector8.add(new JButton("5"),8);
-       userAnswer[8][8] = 5;
        sector8.getComponent(8).setEnabled(false);
        
        revalidate();
    }
    
+   //method: initializeAnswers
+   //purpose: Initializes the answer grids for score checking.
     public void initializeAnswers() {
         int[][] sector0A = {{8, 3, 5},
                             {2, 9, 6},
@@ -313,5 +301,32 @@ public class SudokuBoard extends JFrame{
         sectorUserAnswer[2][0] = sector6A;
         sectorUserAnswer[2][1] = sector7A;
         sectorUserAnswer[2][2] = sector8A;
+        inputAnswers[0][0][0][0] = 8;
+        inputAnswers[0][0][2][1] = 1;
+        inputAnswers[0][1][0][0] = 4;
+        inputAnswers[0][1][0][2] = 6;
+        inputAnswers[0][2][0][2] = 7;
+        inputAnswers[0][2][1][0] = 4;
+        inputAnswers[0][2][2][0] = 6;
+        inputAnswers[0][2][2][1] = 5;
+        inputAnswers[1][0][0][0] = 5;
+        inputAnswers[1][0][0][2] = 9;
+        inputAnswers[1][0][2][1] = 4;
+        inputAnswers[1][0][2][2] = 8;
+        inputAnswers[1][1][0][1] = 3;
+        inputAnswers[1][1][1][1] = 7;
+        inputAnswers[1][1][2][1] = 2;
+        inputAnswers[1][2][0][0] = 7;
+        inputAnswers[1][2][0][1] = 8;
+        inputAnswers[1][2][2][0] = 1;
+        inputAnswers[1][2][2][2] = 3;
+        inputAnswers[2][0][0][1] = 5;
+        inputAnswers[2][0][0][2] = 2;
+        inputAnswers[2][0][1][2] = 1;
+        inputAnswers[2][0][2][0] = 3;
+        inputAnswers[2][1][2][0] = 9;
+        inputAnswers[2][1][2][2] = 2;
+        inputAnswers[2][2][0][1] = 9;
+        inputAnswers[2][2][2][2] = 5;
     }
 }

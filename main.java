@@ -8,7 +8,7 @@ import javax.swing.*;
  * class: CS 245 - Graphical User Interfaces
  * 
  * assignment: Program 1
- * date last modified: 10/10/2017
+ * date last modified: 10/29/2017
  * 
  * purpose: This program runs a hangman game with the ability to freely
  * view credits, high scores, or start another game.

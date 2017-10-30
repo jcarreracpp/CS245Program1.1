@@ -9,7 +9,7 @@ import javax.swing.*;
  * class: CS 245 - Graphical User Interfaces
  * 
  * assignment: Program 1
- * date last modified: 10/10/2017
+ * date last modified: 10/29/2017
  * 
  * purpose: This program runs a hangman game with the ability to freely
  * view credits, high scores, or start another game.
@@ -33,7 +33,6 @@ public class BSet extends JButton{
         setActionCommand("MM");
         setFont(new Font("Papyrus", Font.BOLD, 12));
         setBackground(Color.WHITE);
-        
     }
     //method: skip
     //purpose: Sets a button to be a skip button.
@@ -43,6 +42,23 @@ public class BSet extends JButton{
         setFont(new Font("Papyrus", Font.BOLD, 12));
         setBackground(Color.WHITE);
         
+    }
+    //method: submit
+    //purpose: Sets a button to be a submit button.
+    public void submit(){
+        setText("Submit");
+        setActionCommand("Submit");
+        setFont(new Font("Papyrus", Font.BOLD, 12));
+        setBackground(Color.WHITE);
+        
+    }
+    //method: endSudoku
+    //purpose: Sets a button to be an endSudoku button.
+    public void endSudoku(){
+        setText("End");
+        setActionCommand("ES");
+        setFont(new Font("Papyrus", Font.BOLD, 12));
+        setBackground(Color.WHITE);
     }
     //method: Score
     //purpose: Sets a button to be a Score button.

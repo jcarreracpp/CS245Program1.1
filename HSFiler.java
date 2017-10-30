@@ -1,26 +1,30 @@
 
-import com.sun.xml.internal.ws.util.StringUtils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * file: main.java
+ * authors: Jacob Kim, James Lee, Jorge Luis Carrera
+ * class: CS 245 - Graphical User Interfaces
+ * 
+ * assignment: Program 1
+ * date last modified: 10/29/2017
+ * 
+ * purpose: This program runs a hangman game with the ability to freely
+ * view credits, high scores, or start another game.
  */
 
-/**
- *
- * @author Jorge
- */
 public class HSFiler {
     private String fileName = "highscore.txt";
     private String defaultFill = "ABC...000000";
     private File file = new File(fileName);
     
+    //method: HSFiler
+    //purpose: Constructor checks to see if the file exists first, if not it
+    //makes a new one and fills it with default values.
     public HSFiler(){
         if(file.exists()){
         }else{
@@ -33,6 +37,8 @@ public class HSFiler {
         }
     }
     
+    //method: defaultFill
+    //purpose: Fills the score files with the default string.
     private void defaultFill(){
         String[] hsf = new String[5];
         for(int i = 0; i < hsf.length; i++){
@@ -41,6 +47,8 @@ public class HSFiler {
         setHS(hsf);
     }
     
+    //method: getHS
+    //purpose: Reads the score file to get the current high scores.
     public String[] getHS() {
         String[] hs = new String[5];
         String temp;
@@ -58,6 +66,8 @@ public class HSFiler {
         return hs;
     }
     
+    //method: setHS
+    //purpose: Writes to the score files the current high score table.
     public void setHS(String[] hs) {
         String temp;
 
@@ -74,6 +84,8 @@ public class HSFiler {
 
     }
     
+    //method: addNewHS
+    //purpose: Inserts a new highscore where applicable.
     public void addNewHS(String name, int score, int position){
         String[] toAdd = getHS();
         String[] temp = getHS();
@@ -88,7 +100,9 @@ public class HSFiler {
         }
         setHS(toAdd);
     }
-
+    
+    //method: returnScores
+    //purpose: Returns the scores from the currently buffered high score array.
     public int[] returnScores(){
         String[] scores = getHS();
         int[] score = new int[scores.length];
