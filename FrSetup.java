@@ -406,7 +406,7 @@ public class FrSetup extends JFrame implements ActionListener{
                 score.setText(Integer.toString(scoreVal));
                 level = (int) (Math.random() * 64);
                 getContentPane().removeAll();
-                set();
+                setBubbles();
                 revalidate();
             }
         }else{
@@ -414,7 +414,7 @@ public class FrSetup extends JFrame implements ActionListener{
             right++;
             if(right == uniqueList[level]){
                 getContentPane().removeAll();
-                set();
+                setBubbles();
                 revalidate();
             }
         }
@@ -589,7 +589,7 @@ public class FrSetup extends JFrame implements ActionListener{
     
     //method: set
     //purpose: Sets up the button pressing game after the hangman game.
-    public void set() {
+    public void setBubbles() {
 
         l.setForeground(Color.magenta);
         l.setLocation(600 / 2 - 50, 10);
@@ -712,6 +712,14 @@ public class FrSetup extends JFrame implements ActionListener{
         repaint();
     }
     
+    public void sudokuBoard(){
+        SudokuBoard sb = new SudokuBoard();
+        sb.sudokuSetup(this);
+        sb.presets();
+        revalidate();
+        repaint();
+    }
+    
     //method: actionPerformed
     //purpose: Overrides actionPerformed method for action events,
     //  handles button logic.
@@ -740,7 +748,7 @@ public class FrSetup extends JFrame implements ActionListener{
         }
         if(e.getActionCommand().equals("Skip")){
             getContentPane().removeAll();
-            set();
+            setBubbles();
             revalidate();
             scoreVal = 0;
         }
@@ -933,7 +941,7 @@ public class FrSetup extends JFrame implements ActionListener{
             scoreVal += 100;
             wipe();
             p.removeAll();
-            EndGame();
+            sudokuBoard();
             revalidate();
             repaint();
         }
@@ -962,7 +970,7 @@ public class FrSetup extends JFrame implements ActionListener{
         if (e.getActionCommand().equals("wrn5")) {
             wipe();
             p.removeAll();
-            EndGame();
+            sudokuBoard();
             revalidate();
             repaint();
         }

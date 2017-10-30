@@ -16,6 +16,7 @@ import javax.swing.*;
  */
 
 public class BSet extends JButton{
+    
     //method: back
     //purpose: Sets a button to be a back button.
     public void back(){
